@@ -1,5 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {MessagingService} from './messaging.service';
+import {mergeMapTo} from 'rxjs/operators';
+import {AngularFireMessaging} from '@angular/fire/messaging';
 
 @Component({
   selector: 'app-root',
@@ -10,12 +12,14 @@ export class AppComponent implements OnInit {
   title = 'push-demo';
   nState = Notification.permission;
   btnState = '';
-  constructor(private messaging: MessagingService) {
+  token: any;
+
+  constructor(private afMessaging: AngularFireMessaging) {
   }
 
 
   ngOnInit(): void {
-    this.messaging.requestPermission();
+    this.requestPermission();
     window.addEventListener('beforeinstallprompt', (e) => {
       console.log(e);
     });
@@ -24,7 +28,21 @@ export class AppComponent implements OnInit {
 
   handleAskPermissionClick(): void {
     this.btnState = 'clicked';
-    this.messaging.requestPermission();
+    this.requestPermission();
+  }
+
+  requestPermission(): void {
+    this.afMessaging.requestPermission
+      .pipe(mergeMapTo(this.afMessaging.tokenChanges))
+      .subscribe(
+        (token) => {
+          this.token = token;
+          console.log('Permission granted! Save to the server!', token);
+        },
+        (error) => {
+          console.error(error);
+        },
+      );
   }
 
 }
