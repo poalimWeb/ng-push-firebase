@@ -32,7 +32,7 @@ export class AppComponent implements OnInit {
   listen(): void {
     this.afMessaging.messages
       .subscribe((message) => {
-        console.log(`revieved message:${message}`);
+        console.log(`revieved message:${JSON.stringify(message)}`);
       });
   }
 
