@@ -3,7 +3,9 @@
   "short_name": "push-demo",
   "theme_color": "#1976d2",
   "background_color": "#fafafa",
+  "gcm_sender_id": "922820243419",
   "display": "standalone",
+  "prefer_related_applications":true,
   "scope": "./",
   "start_url": "./",
   "icons": [
