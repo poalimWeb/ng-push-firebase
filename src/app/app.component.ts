@@ -19,11 +19,9 @@ export class AppComponent implements OnInit {
 
 
   ngOnInit(): void {
+    this.addPromptInstall();
     this.requestPermission();
-    window.addEventListener('beforeinstallprompt', (e) => {
-      console.log(e);
-    });
-    // this.listen();
+    this.listen();
   }
 
   handleAskPermissionClick(): void {
@@ -31,13 +29,26 @@ export class AppComponent implements OnInit {
     this.requestPermission();
   }
 
+  listen(): void {
+    this.afMessaging.messages
+      .subscribe((message) => {
+        console.log(`revieved message:${message}`);
+      });
+  }
+
+  addPromptInstall(): void {
+    window.addEventListener('beforeinstallprompt', (e) => {
+      console.log(e);
+    });
+  }
+
   requestPermission(): void {
-    this.afMessaging.requestPermission
-      .pipe(mergeMapTo(this.afMessaging.tokenChanges))
+    this.afMessaging.requestToken
       .subscribe(
         (token) => {
           this.token = token;
-          console.log('Permission granted! Save to the server!', token);
+          console.log('Permission granted!');
+          console.log('Token =', token);
         },
         (error) => {
           console.error(error);
