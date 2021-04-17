@@ -7,6 +7,7 @@ import {ServiceWorkerModule} from '@angular/service-worker';
 import {environment} from '../environments/environment';
 import {AngularFireModule} from '@angular/fire';
 import {AngularFireMessagingModule} from '@angular/fire/messaging';
+import {HttpClientModule} from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import {AngularFireMessagingModule} from '@angular/fire/messaging';
       registrationStrategy: 'registerWhenStable:30000'
     }),
     AngularFireMessagingModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

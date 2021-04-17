@@ -344,6 +344,7 @@
     <h1>notify demo</h1>
     <span>btn: {{btnState}}</span>
     <button (click)="handleAskPermissionClick()">allow notification</button>
+    <button (click)="sendNotification()">send test notification</button>
     <div>token:</div>
     <span style="width: 80%; margin:0 20px" *ngIf="token">{{token}}</span>
   </div>

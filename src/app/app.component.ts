@@ -14,7 +14,7 @@ export class AppComponent implements OnInit {
   btnState = '';
   token: any;
 
-  constructor(private afMessaging: AngularFireMessaging) {
+  constructor(private afMessaging: AngularFireMessaging, private messagingServices: MessagingService) {
   }
 
 
@@ -41,6 +41,11 @@ export class AppComponent implements OnInit {
       console.log(e);
     });
   }
+
+  sendNotification(): void {
+    this.messagingServices.sendNotification(this.token).subscribe(res => console.log(res));
+  }
+
 
   requestPermission(): void {
     this.afMessaging.requestToken

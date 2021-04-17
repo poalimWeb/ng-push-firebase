@@ -1,31 +1,29 @@
 import {Injectable} from '@angular/core';
-import {AngularFireMessaging} from '@angular/fire/messaging';
-import {BehaviorSubject, Observable} from 'rxjs';
-import {mergeMap, mergeMapTo} from 'rxjs/operators';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {Observable} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class MessagingService {
-  currentMessage = new BehaviorSubject(null);
-
-  constructor(private afMessaging: AngularFireMessaging) {
+  constructor(private http: HttpClient) {
   }
 
+  firebeseTestEndpoint = 'https://fcm.googleapis.com/fcm/send';
 
-  /**
-   * @description ask user for permission not recieve notification
-   */
-  requestPermission(): void {
-    this.afMessaging.requestPermission
-      .pipe(mergeMapTo(this.afMessaging.tokenChanges))
-      .subscribe(
-        (token) => {
-          console.log('Permission granted! Save to the server!', token);
-        },
-        (error) => {
-          console.error(error);
-        },
-      );
+  sendNotification(token: string): Observable<any> {
+    const reqBody = {
+      notification: {
+        title: 'BankHapoalim',
+        body: 'dafna'
+      },
+      to: token
+    };
+    let headers = new HttpHeaders();
+    headers = headers.set('Content-Type', 'application/json');
+    headers = headers.set('Authorization', 'key=AAAA1txfb9s:APA91bEyBN4wxVDWrOhVHJGTVhJCDto2kod49J2a--NzXkhvRD0bnq4tsLcs6_BKYPMOLaxlyIHYqZUbypm84tk7oZexBcPWx4_9xOywOyc4qKdatDYFAHMs8Idey64B8cfLGhRLPcnx');
+
+    console.log(headers);
+    return this.http.post(this.firebeseTestEndpoint, reqBody, {headers});
   }
 }
