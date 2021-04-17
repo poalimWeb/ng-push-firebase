@@ -21,7 +21,7 @@ export class MessagingService {
     };
     let headers = new HttpHeaders();
     headers = headers.set('Content-Type', 'application/json');
-    headers = headers.set('Authorization', 'key=AAAA1txfb9s:APA91bEyBN4wxVDWrOhVHJGTVhJCDto2kod49J2a--NzXkhvRD0bnq4tsLcs6_BKYPMOLaxlyIHYqZUbypm84tk7oZexBcPWx4_9xOywOyc4qKdatDYFAHMs8Idey64B8cfLGhRLPcnx');
+    headers = headers.set('Authorization', process.env.firebase_auth);
 
     console.log(headers);
     return this.http.post(this.firebeseTestEndpoint, reqBody, {headers});
