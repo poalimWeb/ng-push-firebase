@@ -27,6 +27,6 @@ export class MessagingService {
       this.headers = this.headers.set('Authorization', res.key);
     });
     console.log('headers',this.headers);
-    return this.http.post(this.firebeseTestEndpoint, reqBody, {this.headers});
+    return this.http.post(this.firebeseTestEndpoint, reqBody, {headers:this.headers});
   }
 }
