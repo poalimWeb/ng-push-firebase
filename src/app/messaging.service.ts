@@ -25,6 +25,7 @@ export class MessagingService {
     this.http.get('/api/key').subscribe((res: any) => {
       auth = res.key;
       headers = headers.set('Authorization', res.key);
+      console.log(headers);
     });
     console.log(headers);
     return this.http.post(this.firebeseTestEndpoint, reqBody, {headers});
