@@ -3,7 +3,7 @@ importScripts("https://www.gstatic.com/firebasejs/8.4.1/firebase-messaging.js")
 
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-  var firebaseConfig = {
+const firebaseConfig = {
     apiKey: "AIzaSyDTWvnulv4pgV2SmmnyLAstNKBkR-PzlvU",
     authDomain: "push-test-3784c.firebaseapp.com",
     projectId: "push-test-3784c",
@@ -16,4 +16,16 @@ importScripts("https://www.gstatic.com/firebasejs/8.4.1/firebase-messaging.js")
 firebase.initializeApp(firebaseConfig);
 // Retrieve an instance of Firebase Messaging so that it can handle background
 // messages.
-var messaging = firebase.messaging();
+const messaging = firebase.messaging();
+
+messaging.onBackgroundMessage((payload) => {
+  console.log('[firebase-messaging-sw.js] Received background message ', payload);
+  // Customize notification here
+  const notificationTitle = 'Background Message Title';
+  const notificationOptions = {
+    body: 'Background Message body.',
+  };
+
+  self.registration.showNotification(notificationTitle,
+    notificationOptions);
+});
