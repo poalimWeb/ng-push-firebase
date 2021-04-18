@@ -23,7 +23,6 @@ export class MessagingService {
     };
 
     this.http.get('/api/key').subscribe((res: any) => {
-      auth = res.key;
       this.headers = this.headers.set('Authorization', res.key);
     });
     console.log('headers',this.headers);
