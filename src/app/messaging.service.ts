@@ -28,7 +28,7 @@ export class MessagingService {
 
   getEnvKey(): void {
     this.http.get('/api/key').subscribe((res: any) => {
-      this.auth = res.data.key;
+      this.auth = res.key;
     });
   }
 }
