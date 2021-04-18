@@ -8,10 +8,15 @@ const appName = 'push-demo'
 // Serve only the static files form the dist directory
 app.use(express.static(__dirname + `/dist/${appName}`));
 
-app.get('/*', function(req,res) {
-
-  res.sendFile(path.join(__dirname+`/dist/${appName}/index.html`));
+app.get('/*', (req, res, next) => {
+  res.sendFile(path.join(__dirname + `/dist/${appName}/index.html`));
+  next();
 });
+
+app.get('/api/key', (req, res, next) => {
+  res.send({key:'process.env.firebase_auth'})
+  next();
+})
 
 // Start the app by listening on the default Heroku port
 app.listen(process.env.PORT || 8080);
