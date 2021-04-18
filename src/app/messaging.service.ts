@@ -16,8 +16,8 @@ export class MessagingService {
     this.headers = this.headers.set('Content-Type', 'application/json');
     const reqBody = {
       notification: {
-        title: 'BankHapoalim',
-        body: 'dafna'
+        title: 'Test message',
+        body: 'test body'
       },
       to: token
     };
