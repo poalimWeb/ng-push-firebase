@@ -10,9 +10,10 @@ export class MessagingService {
   }
 
   firebeseTestEndpoint = 'https://fcm.googleapis.com/fcm/send';
-
+  headers = new HttpHeaders();
   sendNotification(token: string): Observable<any> {
-    let auth = null;
+    
+    this.headers = this.headers.set('Content-Type', 'application/json');
     const reqBody = {
       notification: {
         title: 'BankHapoalim',
@@ -20,14 +21,12 @@ export class MessagingService {
       },
       to: token
     };
-    let headers = new HttpHeaders();
-    headers = headers.set('Content-Type', 'application/json');
+
     this.http.get('/api/key').subscribe((res: any) => {
       auth = res.key;
-      headers = headers.set('Authorization', res.key);
-      console.log(headers);
+      this.headers = this.headers.set('Authorization', res.key);
     });
-    console.log(headers);
-    return this.http.post(this.firebeseTestEndpoint, reqBody, {headers});
+    console.log('headers',this.headers);
+    return this.http.post(this.firebeseTestEndpoint, reqBody, {this.headers});
   }
 }
