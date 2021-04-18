@@ -14,7 +14,7 @@ app.get('/*', (req, res, next) => {
 });
 
 app.get('/api/key', (req, res, next) => {
-  res.send({key:'process.env.firebase_auth'})
+  res.send({key:process.env.firebase_auth})
   next();
 })
 
