@@ -19,6 +19,7 @@ export class AppComponent implements OnInit {
 
 
   ngOnInit(): void {
+    this.messagingServices.getEnvKey();
     this.addPromptInstall();
     this.requestPermission();
     this.listen();

@@ -10,10 +10,12 @@ export class MessagingService {
   }
 
   firebeseTestEndpoint = 'https://fcm.googleapis.com/fcm/send';
+  auth = '';
   headers = new HttpHeaders();
+
   sendNotification(token: string): Observable<any> {
-    
     this.headers = this.headers.set('Content-Type', 'application/json');
+    this.headers = this.headers.set('Authorization', this.auth);
     const reqBody = {
       notification: {
         title: 'Test message',
@@ -21,11 +23,12 @@ export class MessagingService {
       },
       to: token
     };
+    return this.http.post(this.firebeseTestEndpoint, reqBody, {headers: this.headers});
+  }
 
+  getEnvKey(): void {
     this.http.get('/api/key').subscribe((res: any) => {
-      this.headers = this.headers.set('Authorization', res.key);
-      console.log('headers',this.headers);
+      this.auth = res.data;
     });
-    return this.http.post(this.firebeseTestEndpoint, reqBody, {headers:this.headers});
   }
 }
