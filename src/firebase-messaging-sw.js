@@ -1,5 +1,7 @@
-importScripts("https://www.gstatic.com/firebasejs/8.4.1/firebase-app.js");
-importScripts("https://www.gstatic.com/firebasejs/8.4.1/firebase-messaging.js")
+// importScripts("https://www.gstatic.com/firebasejs/8.4.1/firebase-app.js");
+// importScripts("https://www.gstatic.com/firebasejs/8.4.1/firebase-messaging.js")
+
+import firebase from 'firebase/app'
 
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
